@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from beno.models import Task, Tag
+from django.views import generic
 
 
 def index(request):
@@ -15,3 +16,9 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
+class TaskList(generic.ListView):
+    queryset = Task.objects.filter(complete__exact='False')
+    context_object_name = 'incomplete_task_list'
+    template_name = 'tasks/incomplete_task_list.html'

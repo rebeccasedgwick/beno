@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>Open Tasks</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Open Tasks</h1>
+  {% if incomplete_task_list %}
+  <ul>
+    {% for task in incomplete_task_list %}
+      <li>
+        <strong>Priority level {{ task.priority }}:</strong> {{ task.description }}
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>You have no outstanding tasks. Hooray!</p>
+  {% endif %}
+{% endblock %}
