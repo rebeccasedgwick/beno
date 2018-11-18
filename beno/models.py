@@ -11,7 +11,11 @@ class Task(models.Model):
         help_text='Enter new task'
     )
 
-    tag = models.ManyToManyField('Tag', help_text='Select a tag for this task')
+    tag = models.ManyToManyField(
+        'Tag',
+        help_text='Select a tag for this task',
+        blank=True
+    )
     due_by = models.DateTimeField()
     complete = models.BooleanField(default=False)
     notes = models.TextField(null=True, blank=True)
