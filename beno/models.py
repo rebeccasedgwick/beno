@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Task(models.Model):
-    """Represents tasks, which to-do items."""
+    """Model representing a task to do."""
     description = models.TextField(
         'Task',
         max_length=500,
@@ -44,7 +44,7 @@ class Task(models.Model):
         ordering = ['priority', '-due_by']
 
     def __str__(self):
-        """String for representign the Task Model object"""
+        """String for representing the Model object"""
         return self.description
 
     def get_absolute_url(self):
@@ -53,9 +53,9 @@ class Task(models.Model):
 
 
 class Tag(models.Model):
-    """Tags are user-defined categories assigned to tasks to enable grouping"""
+    """Model representing a tag for a task (e.g. home, work, travel)"""
     name = models.CharField(max_length=200, help_text='Choose a tag')
 
     def __str__(self):
-        """String for representing the Tag Model object"""
+        """String for representing the Model object"""
         return self.name
