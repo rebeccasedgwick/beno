@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Beno</h1>
+  <p>Welcome to Beno!</p>
+  <h3>Overview</h3>
+  <p>Here are your records:</p>
+  <ul>
+    <li><strong>All tasks:</strong> {{ num_tasks }} </li>
+    <li><strong>Outstanding tasks:</strong> {{ num_incomplete_tasks }} </li>
+    <li><strong>Tags:</strong> {{ num_tags }} </li>
+  </ul>
+{% endblock %}
