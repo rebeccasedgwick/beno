@@ -1,5 +1,5 @@
 from django.contrib import admin
-from beno.models import Task
+from beno.models import Task, Tag
 
 
 @admin.register(Task)
@@ -17,3 +17,6 @@ class TaskAdmin(admin.ModelAdmin):
             'fields': ('complete',)
         }),
     )
+
+
+admin.site.register(Tag)
