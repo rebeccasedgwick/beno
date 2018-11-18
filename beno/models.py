@@ -40,7 +40,7 @@ class Task(models.Model):
     )
 
     class Meta:
-        ordering = ['priority', '-due_by']
+        ordering = ['due_by', 'priority']
 
     def __str__(self):
         """String for representing the Model object"""
