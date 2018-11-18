@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+import datetime
 
 
 class Task(models.Model):
@@ -14,18 +15,11 @@ class Task(models.Model):
     due_by = models.DateTimeField()
     complete = models.BooleanField(null=True, default=False)
 
-    DUE_STATUS = (
-        ('ny', 'Not yet due'),
-        ('dt', 'Due today'),
-        ('od', 'Overdue'),
-    )
-
-    due_status = models.CharField(
-        max_length=2,
-        choices=DUE_STATUS,
-        blank=True,
-        default='ny',
-    )
+    @property
+    def is_overdue(self):
+        if self.due_by and datetime.datetime.now() > self.due_by:
+            return True
+        return False
 
     PRIORITY = (
         ('1', '1 - High'),
