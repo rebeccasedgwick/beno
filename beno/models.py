@@ -13,7 +13,7 @@ class Task(models.Model):
 
     tag = models.ManyToManyField('Tag', help_text='Select a tag for this task')
     due_by = models.DateTimeField()
-    complete = models.BooleanField(null=True, default=False)
+    complete = models.BooleanField(default=False)
 
     @property
     def is_overdue(self):
