@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>{{ task.description }}</h2>
+
+  <div style="margin-top:20px">
+    <h5 class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}">Priority level: {{ task.priority }}</h5>
+  </div>
+
+  <div style="margin-top:10px">
+    <hr>
+    <h5>Due by:</h5>
+      <p>{{ task.due_by }}</p>
+  </div>
+
+  <div style="margin-top:10px">
+    <hr>
+    <h5>Notes:</h5>
+      <p>{{ task.notes }}</p>
+  </div>
+
+  <div style="margin-top:10px">
+    <hr>
+    <h5>Tags:</h5>
+      {% for tag in task.tag.all %}
+        <a href="">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %}
+  <div>
+{% endblock %}

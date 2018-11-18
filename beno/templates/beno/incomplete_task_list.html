@@ -9,8 +9,8 @@
   {% if incomplete_task_list %}
   <ul>
     {% for task in incomplete_task_list %}
-      <li>
-        <strong>Priority level {{ task.priority }}:</strong> {{ task.description }}
+      <li class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}">
+        <strong>Priority level {{ task.priority }}: </strong><a href="{{ task.get_absolute_url }}">{{ task.description }}</a>
       </li>
     {% endfor %}
   </ul>

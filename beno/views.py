@@ -21,4 +21,8 @@ def index(request):
 class TaskList(generic.ListView):
     queryset = Task.objects.filter(complete__exact='False')
     context_object_name = 'incomplete_task_list'
-    template_name = 'tasks/incomplete_task_list.html'
+    template_name = 'beno/incomplete_task_list.html'
+
+
+class TaskDetail(generic.DetailView):
+    model = Task
