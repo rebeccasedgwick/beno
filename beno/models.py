@@ -5,15 +5,16 @@ import datetime
 
 class Task(models.Model):
     """Model representing a task to do."""
-    description = models.TextField(
+    description = models.CharField(
         'Task',
-        max_length=500,
+        max_length=300,
         help_text='Enter new task'
     )
 
     tag = models.ManyToManyField('Tag', help_text='Select a tag for this task')
     due_by = models.DateTimeField()
     complete = models.BooleanField(default=False)
+    notes = models.TextField(null=True, blank=True)
 
     @property
     def is_overdue(self):
