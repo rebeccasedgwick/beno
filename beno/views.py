@@ -26,3 +26,7 @@ class TaskList(generic.ListView):
 
 class TaskDetail(generic.DetailView):
     model = Task
+
+
+class TagList(generic.ListView):
+    model = Tag

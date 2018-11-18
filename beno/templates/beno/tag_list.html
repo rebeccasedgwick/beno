@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>All tags</title>
+{% endblock %}
+
+{% block content %}
+  <h1>All Tags</h1>
+  {% if tag_list %}
+    <ul>
+      {% for tag in tag_list %}
+        <li>
+          <a href="">{{ tag.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p><i>You have not tagged any tasks yet.</i></p>
+  {% endif %}
+{% endblock %}
