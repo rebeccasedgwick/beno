@@ -1,5 +1,5 @@
 from django.contrib import admin
-from beno.models import Task, Tag
+from beno.models import Task
 
 
 @admin.register(Task)
