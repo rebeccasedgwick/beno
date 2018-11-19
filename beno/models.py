@@ -1,10 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 
 
 class Task(models.Model):
     """Model representing a task to do."""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(
         'Task',
         max_length=300,
