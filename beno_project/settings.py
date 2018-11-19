@@ -128,4 +128,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
+LOGIN_URL = '/beno/accounts/login/'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

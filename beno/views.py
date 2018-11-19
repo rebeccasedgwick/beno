@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from beno.models import Task, Tag
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+@login_required
 def index(request):
     """View function for homepage of the site."""
     num_tasks = Task.objects.all().count()
@@ -21,19 +24,19 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class TaskList(generic.ListView):
+class TaskList(LoginRequiredMixin, generic.ListView):
     queryset = Task.objects.filter(complete__exact='False')
     context_object_name = 'incomplete_task_list'
     template_name = 'beno/incomplete_task_list.html'
 
 
-class TaskDetail(generic.DetailView):
+class TaskDetail(LoginRequiredMixin, generic.DetailView):
     model = Task
 
 
-class TagList(generic.ListView):
+class TagList(LoginRequiredMixin, generic.ListView):
     model = Tag
 
 
-class TagDetail(generic.DetailView):
+class TagDetail(LoginRequiredMixin, generic.DetailView):
     model = Tag
