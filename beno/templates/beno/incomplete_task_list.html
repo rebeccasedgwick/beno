@@ -9,8 +9,10 @@
   {% if incomplete_task_list %}
     <ul>
       {% for task in incomplete_task_list %}
-        <li class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}">
+        <li class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}" style="margin-top:20px">
           <strong>Priority level {{ task.priority }}: </strong><a href="{{ task.get_absolute_url }}">{{ task.description }}</a>
+          <br>
+          {% if task.is_overdue %}OVERDUE{% endif %}
         </li>
       {% endfor %}
     </ul>

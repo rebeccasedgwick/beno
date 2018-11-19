@@ -8,7 +8,11 @@
   <h2>{{ task.description }}</h2>
 
   <div style="margin-top:20px">
-    <h5 class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}">Priority {{ task.get_priority_display }}</h5>
+    <h5 class="{% if task.priority == '3' %}text-success{% elif task.priority == '1' %}text-danger{% else %}text-warning{% endif %}">
+      Priority {{ task.get_priority_display }}
+      <br>
+      {% if task.is_overdue %}OVERDUE{% endif %}
+    </h5>
   </div>
 
   <div style="margin-top:10px">

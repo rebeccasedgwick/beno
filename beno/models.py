@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-import datetime
+from django.utils import timezone
 
 
 class Task(models.Model):
@@ -20,12 +20,6 @@ class Task(models.Model):
     complete = models.BooleanField(default=False)
     notes = models.TextField(null=True, blank=True)
 
-    @property
-    def is_overdue(self):
-        if self.due_by and datetime.datetime.now() > self.due_by:
-            return True
-        return False
-
     PRIORITY = (
         ('1', '1 - High'),
         ('2', '2 - Medium'),
@@ -39,8 +33,11 @@ class Task(models.Model):
         default='2'
     )
 
-    class Meta:
-        ordering = ['due_by', 'priority']
+    @property
+    def is_overdue(self):
+        if self.due_by and timezone.now() > self.due_by:
+            return True
+        return False
 
     def __str__(self):
         """String for representing the Model object"""
@@ -49,6 +46,9 @@ class Task(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this task"""
         return reverse('task-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = ['due_by', 'priority']
 
 
 class Tag(models.Model):

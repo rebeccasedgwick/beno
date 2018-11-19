@@ -8,7 +8,10 @@
   <h5>Tasks:</h5>
   <ul>
     {% for task in tag.task_set.all %}
-    <li><a href="{{ task.get_absolute_url }}">{{ task.description }}</a></li>
+    <li>
+      <a href="{{ task.get_absolute_url }}">{{ task.description }}</a>
+      <p class="text-danger">{% if task.is_overdue %}OVERDUE{% endif %}</p>
+    </li>
     {% endfor %}
   </ul>
   {% endblock %}
