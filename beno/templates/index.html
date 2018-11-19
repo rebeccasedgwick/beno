@@ -14,4 +14,5 @@
     <li><strong>Outstanding tasks:</strong> {{ num_incomplete_tasks }} </li>
     <li><strong>Tags:</strong> {{ num_tags }} </li>
   </ul>
+  <p>You've visited Beno {{ num_visits }}{% if num_visits == 1%} time{% else %} times{% endif %}.</p>
 {% endblock %}
