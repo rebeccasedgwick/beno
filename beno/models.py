@@ -52,6 +52,7 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['due_by', 'priority']
+        permissions = (('can_mark_completed', 'Mark task as complete'),)
 
 
 class Tag(models.Model):
