@@ -24,10 +24,18 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class TaskList(LoginRequiredMixin, generic.ListView):
-    queryset = Task.objects.filter(complete__exact='False')
-    context_object_name = 'incomplete_task_list'
-    template_name = 'beno/incomplete_task_list.html'
+class AllTasksList(LoginRequiredMixin, generic.ListView):
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user).order_by('due_by')
+    context_object_name = 'all_tasks_list'
+    template_name = 'beno/all_tasks_list.html'
+
+
+class OpenTasksList(LoginRequiredMixin, generic.ListView):
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user).filter(complete__exact='False').order_by('due_by')
+    context_object_name = 'open_tasks_list'
+    template_name = 'beno/open_tasks_list.html'
 
 
 class TaskDetail(LoginRequiredMixin, generic.DetailView):
