@@ -25,20 +25,36 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class AllTasksList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
-    permission_required = 'task.can_mark_completed'
-    def get_queryset(self):
-        return Task.objects.filter(user=self.request.user).order_by('due_by')
+class AllTasksList(
+        LoginRequiredMixin,
+        PermissionRequiredMixin,
+        generic.ListView
+        ):
     context_object_name = 'all_tasks_list'
     template_name = 'beno/all_tasks_list.html'
-
-
-class OpenTasksList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     permission_required = 'task.can_mark_completed'
+
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user).filter(complete__exact='False').order_by('due_by')
+        return Task.objects.filter(
+            user=self.request.user
+            ).order_by('due_by')
+
+
+class OpenTasksList(
+        LoginRequiredMixin,
+        PermissionRequiredMixin,
+        generic.ListView
+        ):
     context_object_name = 'open_tasks_list'
     template_name = 'beno/open_tasks_list.html'
+    permission_required = 'task.can_mark_completed'
+
+    def get_queryset(self):
+        return Task.objects.filter(
+            user=self.request.user
+            ).filter(
+            complete__exact='False'
+            ).order_by('due_by')
 
 
 class TaskDetail(LoginRequiredMixin, generic.DetailView):
