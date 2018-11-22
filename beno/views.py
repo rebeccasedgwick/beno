@@ -16,9 +16,12 @@ from beno.models import Task, Tag, User
 @login_required
 def index(request):
     """View function for homepage of the site."""
-    num_tasks = Task.objects.all().count()
-    num_incomplete_tasks = Task.objects.filter(complete__exact='False').count()
-    num_tags = Tag.objects.all().count
+    num_tasks = Task.objects.filter(user=request.user.id).count()
+    num_incomplete_tasks = Task.objects.filter(
+        user=request.user.id,
+        complete__exact='False'
+        ).count()
+    num_tags = Tag.objects.count
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
 
@@ -65,6 +68,9 @@ class OpenTasksList(
 class TaskDetail(LoginRequiredMixin, generic.DetailView):
     model = Task
 
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
 
 class TagList(LoginRequiredMixin, generic.ListView):
     model = Tag
@@ -81,9 +87,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     initial = {'due_by': default_due_date}
 
     def form_valid(self, form):
-        # form.instance.created_by = self.request.user
         form.instance.user = User.objects.get(id=self.request.user.id)
-
         return super(TaskCreate, self).form_valid(form)
 
 
@@ -91,7 +95,13 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['description', 'notes', 'due_by', 'complete', 'priority']
 
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('open_tasks_list')
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
