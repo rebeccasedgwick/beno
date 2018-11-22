@@ -5,12 +5,30 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Edit task</h2>
+  <h2>Task info</h2>
+  {% load crispy_forms_tags %}
   <form action="" method="post">
     {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
+
+    {{ form.description|as_crispy_field }}
+    {{ form.notes|as_crispy_field }}
+    <div class="row">
+      <div class="col-6">
+        {{ form.due_by|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.priority|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        {{ form.tag|as_crispy_field }}
+      </div>
+
+    <div class="col-6">
+      {{ form.complete|as_crispy_field }}
+    </div>
+    </div> 
+    <button type="submit" class="btn btn-success">Save task</button>
   </form>
 {% endblock %}
