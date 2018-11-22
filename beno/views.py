@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -35,7 +34,6 @@ def index(request):
 
 class AllTasksList(
         LoginRequiredMixin,
-        PermissionRequiredMixin,
         generic.ListView
         ):
     context_object_name = 'all_tasks_list'
@@ -50,7 +48,6 @@ class AllTasksList(
 
 class OpenTasksList(
         LoginRequiredMixin,
-        PermissionRequiredMixin,
         generic.ListView
         ):
     context_object_name = 'open_tasks_list'
