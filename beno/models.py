@@ -48,7 +48,7 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a detail record for this task"""
-        return reverse('task-detail', args=[str(self.id)])
+        return reverse('task_detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['due_by', 'priority']

@@ -1,9 +1,17 @@
+import datetime
+
 from django.shortcuts import render
-from beno.models import Task, Tag
-from django.views import generic
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
+
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from django.urls import reverse_lazy
+
+from beno.models import Task, Tag, User
 
 
 @login_required
@@ -67,3 +75,26 @@ class TagList(LoginRequiredMixin, generic.ListView):
 
 class TagDetail(LoginRequiredMixin, generic.DetailView):
     model = Tag
+
+
+class TaskCreate(LoginRequiredMixin, CreateView):
+    model = Task
+    fields = ['description', 'notes', 'due_by', 'complete', 'priority', 'tag']
+    default_due_date = datetime.datetime.now() + datetime.timedelta(days=7)
+    initial = {'due_by': default_due_date}
+
+    def form_valid(self, form):
+        # form.instance.created_by = self.request.user
+        form.instance.user = User.objects.get(id=self.request.user.id)
+
+        return super(TaskCreate, self).form_valid(form)
+
+
+class TaskUpdate(LoginRequiredMixin, UpdateView):
+    model = Task
+    fields = ['description', 'notes', 'due_by', 'complete', 'priority']
+
+
+class TaskDelete(LoginRequiredMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy('open_tasks_list')

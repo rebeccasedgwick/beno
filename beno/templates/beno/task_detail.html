@@ -34,4 +34,13 @@
         <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
   <div>
+
+  <div style="margin-top:10px">
+    <hr>
+    <h5>Update or delete this task</h5>
+    <a href="{% url 'task_update' pk=task.id %}">Update</a>
+    <br>
+    <a href="{% url 'task_delete' pk=task.id %}">Delete</a>
+
+  <div>
 {% endblock %}

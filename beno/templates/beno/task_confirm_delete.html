@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>Remove Task</title>
+{% endblock %}
+
+{% block content %}
+
+<h2>Delete task</h2>
+
+<p>Are you sure you want to delete this task?</p>
+<br>
+<p><i>{{ task.description }}</i></p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+
+{% endblock %}
