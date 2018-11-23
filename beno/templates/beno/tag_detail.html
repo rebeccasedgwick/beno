@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-  <h2>{{ tag.name.capitalize }}</h2>
+  <h1>Tasks in {{ tag.name.capitalize }}</h1>
   <h5>Tasks:</h5>
   <ul>
     {% for task in tag.task_set.all %}
