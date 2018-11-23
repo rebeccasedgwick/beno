@@ -57,6 +57,7 @@ class Task(models.Model):
 class Tag(models.Model):
     """Model representing a tag for a task (e.g. home, work, travel)"""
     name = models.CharField(max_length=200, help_text='Choose a tag')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """String for representing the Model object"""

@@ -21,7 +21,7 @@ def index(request):
         user=request.user.id,
         complete__exact='False'
         ).count()
-    num_tags = Tag.objects.count
+    num_tags = Tag.objects.filter(user=request.user.id).count()
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
 
@@ -75,9 +75,15 @@ class TaskDetail(LoginRequiredMixin, generic.DetailView):
 class TagList(LoginRequiredMixin, generic.ListView):
     model = Tag
 
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user)
+
 
 class TagDetail(LoginRequiredMixin, generic.DetailView):
     model = Tag
+
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user)
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
