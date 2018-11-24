@@ -28,6 +28,7 @@
             <li><a href="{% url 'all-tasks' %}">All tasks</a></li>
             <br>
             <li><a href="{% url 'categories' %}">All categories</a></li>
+            <li><a href="{% url 'category_create' %}">Add new category</a></li>
             <br>
           {% if user.is_authenticated %}
             <li>Logged in as {{ user.get_username }}</li>

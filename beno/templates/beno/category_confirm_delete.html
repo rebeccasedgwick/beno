@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>Remove Category</title>
+{% endblock %}
+
+{% block content %}
+<h1>Delete category</h1>
+
+<p>Are you sure you want to delete this category?</p>
+<br>
+<p><i>{{ category.name }}</i></p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+
+{% endblock %}

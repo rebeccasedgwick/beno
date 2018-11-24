@@ -35,14 +35,14 @@
       {% for category in task.category.all %}
         <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
-  <div>
+  </div>
 
   <div style="margin-top:10px">
     <hr>
     <h5>Update or delete this task</h5>
-    <a href="{% url 'task_update' pk=task.id %}">Update</a>
-    <br>
-    <a href="{% url 'task_delete' pk=task.id %}">Delete</a>
-
-  <div>
+    <ul>
+      <li><a href="{% url 'task_update' pk=task.id %}">Update</a></li>
+      <li><a href="{% url 'task_delete' pk=task.id %}">Delete</a></li>
+    </ul>  
+  </div>
 {% endblock %}

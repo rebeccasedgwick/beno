@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from beno.models import Task
+from beno.models import Task, Category
 
 
 class TaskModelForm(ModelForm):
@@ -26,4 +26,15 @@ class TaskModelForm(ModelForm):
 
     class Meta:
         model = Task
+        fields = '__all__'
+
+
+class CategoryModelForm(ModelForm):
+    def clean_data(self):
+        data = self.cleaned_data
+
+        return data
+
+    class Meta:
+        model = Category
         fields = '__all__'

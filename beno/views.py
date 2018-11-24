@@ -88,7 +88,14 @@ class CategoryDetail(LoginRequiredMixin, generic.DetailView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['description', 'notes', 'due_by', 'complete', 'priority', 'category']
+    fields = [
+        'description',
+        'notes',
+        'due_by',
+        'complete',
+        'priority',
+        'category'
+        ]
     default_due_date = datetime.datetime.now() + datetime.timedelta(days=7)
     initial = {'due_by': default_due_date}
 
@@ -99,7 +106,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['description', 'notes', 'due_by', 'complete', 'priority']
+    fields = ['description', 'notes', 'due_by', 'complete', 'category', 'priority']
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
@@ -107,7 +114,33 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
-    success_url = reverse_lazy('open_tasks_list')
+    success_url = reverse_lazy('open-tasks')
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
+
+
+class CategoryCreate(LoginRequiredMixin, CreateView):
+    model = Category
+    fields = ['name', ]
+    success_url = reverse_lazy('categories')
+
+    def form_valid(self, form):
+        form.instance.user = User.objects.get(id=self.request.user.id)
+        return super(CategoryCreate, self).form_valid(form)
+
+
+class CategoryUpdate(LoginRequiredMixin, UpdateView):
+    model = Category
+    fields = ['name']
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+
+
+class CategoryDelete(LoginRequiredMixin, DeleteView):
+    model = Category
+    success_url = reverse_lazy('categories')
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
