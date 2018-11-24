@@ -27,7 +27,7 @@
             <li><a href="{% url 'open-tasks' %}">Open tasks</a></li>
             <li><a href="{% url 'all-tasks' %}">All tasks</a></li>
             <br>
-            <li><a href="{% url 'tags' %}">All tags</a></li>
+            <li><a href="{% url 'categories' %}">All categories</a></li>
             <br>
           {% if user.is_authenticated %}
             <li>Logged in as {{ user.get_username }}</li>

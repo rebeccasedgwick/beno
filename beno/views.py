@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
 
-from beno.models import Task, Tag, User
+from beno.models import Task, Category, User
 
 
 @login_required
@@ -21,14 +21,14 @@ def index(request):
         user=request.user.id,
         complete__exact='False'
         ).count()
-    num_tags = Tag.objects.filter(user=request.user.id).count()
+    num_categories = Category.objects.filter(user=request.user.id).count()
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
 
     context = {
         'num_tasks': num_tasks,
         'num_incomplete_tasks': num_incomplete_tasks,
-        'num_tags': num_tags,
+        'num_categories': num_categories,
         'num_visits': num_visits,
     }
 
@@ -72,23 +72,23 @@ class TaskDetail(LoginRequiredMixin, generic.DetailView):
         return Task.objects.filter(user=self.request.user)
 
 
-class TagList(LoginRequiredMixin, generic.ListView):
-    model = Tag
+class CategoryList(LoginRequiredMixin, generic.ListView):
+    model = Category
 
     def get_queryset(self):
-        return Tag.objects.filter(user=self.request.user)
+        return Category.objects.filter(user=self.request.user)
 
 
-class TagDetail(LoginRequiredMixin, generic.DetailView):
-    model = Tag
+class CategoryDetail(LoginRequiredMixin, generic.DetailView):
+    model = Category
 
     def get_queryset(self):
-        return Tag.objects.filter(user=self.request.user)
+        return Category.objects.filter(user=self.request.user)
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['description', 'notes', 'due_by', 'complete', 'priority', 'tag']
+    fields = ['description', 'notes', 'due_by', 'complete', 'priority', 'category']
     default_due_date = datetime.datetime.now() + datetime.timedelta(days=7)
     initial = {'due_by': default_due_date}
 

@@ -12,10 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name='Category',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Choose a tag', max_length=200)),
+                ('name', models.CharField(help_text='Choose a category', max_length=200)),
             ],
         ),
         migrations.CreateModel(
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('complete', models.BooleanField(default=False, null=True)),
                 ('due_status', models.CharField(blank=True, choices=[('ny', 'Not yet due'), ('dt', 'Due today'), ('od', 'Overdue')], default='ny', max_length=2)),
                 ('priority', models.CharField(choices=[('1', '1 - High'), ('2', '2 - Medium'), ('3', '3 - Low')], default='2', max_length=1)),
-                ('tag', models.ManyToManyField(help_text='Select a tag for this task', to='beno.Tag')),
+                ('category', models.ManyToManyField(help_text='Select a category for this task', to='beno.Category')),
             ],
             options={
                 'ordering': ['priority', '-due_by'],

@@ -14,9 +14,9 @@ class Task(models.Model):
         help_text='Enter new task'
     )
 
-    tag = models.ManyToManyField(
-        'Tag',
-        help_text='Select a tag for this task',
+    category = models.ManyToManyField(
+        'Category',
+        help_text='Select a category for this task',
         blank=True
     )
     due_by = models.DateTimeField()
@@ -54,9 +54,9 @@ class Task(models.Model):
         ordering = ['due_by', 'priority']
 
 
-class Tag(models.Model):
-    """Model representing a tag for a task (e.g. home, work, travel)"""
-    name = models.CharField(max_length=200, help_text='Choose a tag')
+class Category(models.Model):
+    """Model representing a category for a task (e.g. home, work, travel)"""
+    name = models.CharField(max_length=200, help_text='Choose a category')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -64,5 +64,5 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        """Returns the url to access a detail record for this tag"""
-        return reverse('tag-detail', args=[str(self.id)])
+        """Returns the url to access a detail record for this category"""
+        return reverse('category-detail', args=[str(self.id)])

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             options={'ordering': ['due_by', 'priority']},
         ),
         migrations.AddField(
-            model_name='tag',
+            model_name='category',
             name='user',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
             preserve_default=False,

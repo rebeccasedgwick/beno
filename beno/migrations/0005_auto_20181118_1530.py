@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='task',
-            name='tag',
-            field=models.ManyToManyField(blank=True, help_text='Select a tag for this task', to='beno.Tag'),
+            name='category',
+            field=models.ManyToManyField(blank=True, help_text='Select a category for this task', to='beno.Category'),
         ),
     ]

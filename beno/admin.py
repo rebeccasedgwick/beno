@@ -1,17 +1,17 @@
 from django.contrib import admin
-from beno.models import Task, Tag
+from beno.models import Task, Category
 
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('description', 'user', 'due_by', 'priority', 'complete')
-    list_filter = ('complete', 'priority', 'tag', 'due_by')
+    list_filter = ('complete', 'priority', 'category', 'due_by')
     fieldsets = (
         (None, {
             'fields': ('user',)
         }),
         ('Task info', {
-            'fields': ('description', 'notes', 'tag')
+            'fields': ('description', 'notes', 'category')
         }),
         ('Prioritization', {
             'fields': ('priority', 'due_by')
@@ -22,4 +22,4 @@ class TaskAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Tag)
+admin.site.register(Category)
