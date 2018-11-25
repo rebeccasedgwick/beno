@@ -1,0 +1,116 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields":
+    {
+      "username": "alice",
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "email": "alice@email.com"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields":
+    {
+      "username": "bob",
+      "first_name": "Bob",
+      "last_name": "Jones",
+      "email": "bob@email.com"
+    }
+  },
+  {
+    "model": "beno.category",
+    "pk": 1,
+    "fields":
+    {
+      "name": "home",
+      "user": 2
+    }
+  },
+  {
+    "model": "beno.category",
+    "pk": 2,
+    "fields":
+    {
+      "name": "work",
+      "user": 2
+    }
+  },
+  {
+    "model": "beno.category",
+    "pk": 3,
+    "fields":
+    {
+      "name": "django",
+      "user": 3
+    }
+  },
+  {
+    "model": "beno.category",
+    "pk": 4,
+    "fields":
+    {
+      "name": "python",
+      "user": 3
+    }
+  },
+  {
+    "model": "beno.task",
+    "pk": 1,
+    "fields":
+    {
+      "user": 2,
+      "description": "Alice's task",
+      "due_by": "2018-12-05T22:00:00Z",
+      "complete": false,
+      "notes": "More info on things for Alice to do",
+      "priority": "1",
+      "category": [1, 2]
+    }
+  },
+  {
+    "model": "beno.task",
+    "pk": 2,
+    "fields":
+    {
+      "user": 2,
+      "description": "Another task for Alice",
+      "due_by": "2018-12-08T12:00:00Z",
+      "complete": false,
+      "notes": "More info on things for Alice to do",
+      "priority": "2",
+      "category": [1, 2]
+    }
+  },
+  {
+    "model": "beno.task",
+    "pk": 3,
+    "fields":
+    {
+      "user": 3,
+      "description": "Fizzbuzz again",
+      "due_by": "2019-01-01T11:00:00Z",
+      "complete": false,
+      "notes": "in python",
+      "priority": "3",
+      "category": [4]
+    }
+  },
+  {
+    "model": "beno.task",
+    "pk": 4,
+    "fields":
+    {
+      "user": 3,
+      "description": "A different task",
+      "due_by": "2018-11-10T11:18:55Z",
+      "complete": false,
+      "notes": "",
+      "priority": "1",
+      "category": [4]
+    }
+  }
+]
