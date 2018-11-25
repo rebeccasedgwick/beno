@@ -144,3 +144,9 @@ class CategoryDelete(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
+
+
+class UserSignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('/')
+    template_name = 'signup.html'
