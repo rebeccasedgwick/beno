@@ -1,9 +1,10 @@
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -146,7 +147,7 @@ class CategoryDelete(LoginRequiredMixin, DeleteView):
         return Category.objects.filter(user=self.request.user)
 
 
-class UserSignUp(generic.CreateView):
+class SignUp(generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('index')
     template_name = 'signup.html'
