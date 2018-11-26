@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -107,7 +107,14 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['description', 'notes', 'due_by', 'complete', 'category', 'priority']
+    fields = [
+        'description',
+        'notes',
+        'due_by',
+        'complete',
+        'category',
+        'priority'
+        ]
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
