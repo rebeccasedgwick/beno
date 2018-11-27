@@ -1,14 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.db.models import CharField
+from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
+
+class User(AbstractUser):
+    first_name = CharField(_("User firstname"), blank=True, max_length=30)
+    last_name = CharField(_("User lastname"), blank=True, max_length=150)
+    email = CharField(_("User email"), blank=True, max_length=254)
+
+    def get_absolute_url(self):
+        return reverse("users:detail", kwargs={"username": self.username})
 
 
 class Task(models.Model):
     """Model representing a task to do."""
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.CharField(
+    description = CharField(
         'Task',
         max_length=300,
         help_text='Enter new task'
@@ -29,7 +40,7 @@ class Task(models.Model):
         ('3', '3 - Low')
     )
 
-    priority = models.CharField(
+    priority = CharField(
         max_length=1,
         choices=PRIORITY,
         blank=False,
@@ -56,7 +67,7 @@ class Task(models.Model):
 
 class Category(models.Model):
     """Model representing a category for a task (e.g. home, work, travel)"""
-    name = models.CharField(max_length=200, help_text='Choose a category')
+    name = CharField(max_length=200, help_text='Choose a category')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

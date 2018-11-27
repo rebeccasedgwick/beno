@@ -1,6 +1,8 @@
 import datetime
-
+from django import forms
 from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +18,7 @@ class TaskModelForm(ModelForm):
             raise ValidationError(_('Please enter a future date'))
 
         # Check if a date is in the allowed range (+6 months from now)
-        if data['due_by'] > datetime.dateime.now() + datetime.timedelta(
+        if data['due_by'] > datetime.datetime.now() + datetime.timedelta(
             months=4
         ):
             raise ValidationError(_('Date must be less than 6 months away'))
@@ -38,3 +40,26 @@ class CategoryModelForm(ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
+
+
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(
+        max_length=30, required=False, help_text='Optional.'
+        )
+    last_name = forms.CharField(
+        max_length=150, required=False, help_text='Optional.'
+        )
+    email = forms.EmailField(
+        max_length=254, help_text='Required. Inform a valid email address.'
+        )
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2',
+            )

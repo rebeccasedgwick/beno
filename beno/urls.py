@@ -10,7 +10,7 @@ urlpatterns = [
     path('task/<int:pk>/update/', views.TaskUpdate.as_view(), name='task_update'),
     path('task/<int:pk>/delete/', views.TaskDelete.as_view(), name='task_delete'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', views.SignUp.as_view(), name='signup'),
+    path('accounts/signup/', views.signup, name='signup'),
     path('category/create/', views.CategoryCreate.as_view(), name='category_create'),
     path('categories/', views.CategoryList.as_view(), name='categories'),
     path('category/<int:pk>', views.CategoryDetail.as_view(), name='category-detail'),

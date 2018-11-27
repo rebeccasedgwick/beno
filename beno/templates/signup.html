@@ -9,9 +9,12 @@
   <h3>Create your account</h3>
   {% load crispy_forms_tags %}
 
-  <form action="" method="post">
+  <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
+
+
+
     <button type="submit" class="btn btn-success">Sign up</button>
   </form>
 
