@@ -13,17 +13,14 @@ class TaskModelForm(ModelForm):
     def clean_data(self):
         data = self.cleaned_data
 
-        # Check if a date is not in the past
         if data['due_by'] < datetime.date.today():
             raise ValidationError(_('Please enter a future date'))
 
-        # Check if a date is in the allowed range (+6 months from now)
         if data['due_by'] > datetime.datetime.now() + datetime.timedelta(
             months=4
         ):
             raise ValidationError(_('Date must be less than 6 months away'))
 
-        # Return the cleaned data
         return data
 
     class Meta:

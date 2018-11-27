@@ -1,5 +1,6 @@
 from django.contrib import admin
-from beno.models import Task, Category
+from django.contrib.auth.admin import UserAdmin
+from beno.models import Task, Category, User
 
 
 @admin.register(Task)
@@ -23,3 +24,4 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category)
+admin.site.register(User, UserAdmin)
