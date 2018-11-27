@@ -7,13 +7,15 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
-    db_table = 'auth_user'
     first_name = CharField(_("User firstname"), blank=True, max_length=30)
     last_name = CharField(_("User lastname"), blank=True, max_length=150)
     email = CharField(_("User email"), blank=True, max_length=254)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
+
+    class Meta:
+        db_table = 'auth_user'
 
 
 class Task(models.Model):
