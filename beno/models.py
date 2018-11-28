@@ -1,19 +1,46 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
-class User(AbstractBaseUser):
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, name, password):
+        user = self.model(email=email, name=name, password=password)
+        user.set_password(password)
+        user.is_staff = False
+        user.is_superuser = False
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, password):
+        user = self.create_user(email=email, name=name, password=password)
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+    def get_by_natural_key(self, email_):
+        print(email_)
+        return self.get(email=email_)
+
+
+class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(_("Full name"), blank=True, max_length=60)
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name', 'password']
     USERNAME_FIELD = 'email'
 
+    objects = CustomUserManager()
+
     def get_short_name(self):
+        return self.name
+
+    def natural_key(self):
         return self.email
 
     def __str__(self):
