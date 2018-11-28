@@ -11,9 +11,6 @@ class User(AbstractUser):
     last_name = CharField(_("Last name"), blank=True, max_length=150)
     email = CharField(_("Email address"), blank=False, max_length=254)
 
-    def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"username": self.username})
-
 
 class Task(models.Model):
     """Model representing a task to do."""
