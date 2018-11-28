@@ -1,13 +1,10 @@
 import datetime
 from django.forms import ModelForm
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from beno.models import Task, Category
-
-User = get_user_model()
+from beno.models import Task, Category, User
 
 
 class TaskModelForm(ModelForm):
@@ -41,20 +38,6 @@ class CategoryModelForm(ModelForm):
 
 
 class SignUpForm(UserCreationForm):
-    error_message = UserCreationForm.error_messages.update(
-        {"duplicate_username": _("This username has already been taken.")}
-    )
-
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('name', 'email', 'password1', 'password2', )
-
-    def clean_username(self):
-        username = self.cleaned_data["username"]
-
-        try:
-            User.objects.get(username=username)
-        except User.DoesNotExist:
-            return username
-
-        raise ValidationError(self.error_messages["duplicate_username"])
+        fields = ('email', 'name')
