@@ -1,23 +1,30 @@
 from django.conf import settings
 from django.db import models
-from django.db.models import CharField
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
-class User(AbstractUser):
-    first_name = CharField(_("First name"), blank=True, max_length=30)
-    last_name = CharField(_("Last name"), blank=True, max_length=150)
-    email = CharField(_("Email address"), blank=False, max_length=254)
+class User(AbstractBaseUser):
+    name = models.CharField(_("Full name"), blank=True, max_length=60)
+    email = models.EmailField(unique=True)
+    is_staff = models.BooleanField(default=False)
+    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = 'email'
+
+    def get_short_name(self):
+        return self.email
+
+    def __str__(self):
+        return self.email
 
 
 class Task(models.Model):
     """Model representing a task to do."""
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    description = CharField(
+    description = models.CharField(
         'Task',
         max_length=300,
         help_text='Enter new task'
@@ -38,7 +45,7 @@ class Task(models.Model):
         ('3', '3 - Low')
     )
 
-    priority = CharField(
+    priority = models.CharField(
         max_length=1,
         choices=PRIORITY,
         blank=False,
@@ -65,7 +72,7 @@ class Task(models.Model):
 
 class Category(models.Model):
     """Model representing a category for a task (e.g. home, work, travel)"""
-    name = CharField(max_length=200, help_text='Choose a category')
+    name = models.CharField(max_length=200, help_text='Choose a category')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -2,8 +2,6 @@ import datetime
 from django.forms import ModelForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -49,7 +47,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('name', 'email', 'password1', 'password2', )
 
     def clean_username(self):
         username = self.cleaned_data["username"]
