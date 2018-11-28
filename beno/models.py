@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(_("Full name"), blank=True, max_length=60)
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
-    REQUIRED_FIELDS = ['name', 'password']
+    REQUIRED_FIELDS = ['name']
     USERNAME_FIELD = 'email'
 
     objects = CustomUserManager()
