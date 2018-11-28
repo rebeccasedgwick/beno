@@ -1,6 +1,6 @@
 [
   {
-    "model": "auth.user",
+    "model": "beno.user",
     "pk": 2,
     "fields":
     {
@@ -11,7 +11,7 @@
     }
   },
   {
-    "model": "auth.user",
+    "model": "beno.user",
     "pk": 3,
     "fields":
     {

@@ -14,9 +14,6 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
 
-    class Meta:
-        db_table = 'auth_user'
-
 
 class Task(models.Model):
     """Model representing a task to do."""
