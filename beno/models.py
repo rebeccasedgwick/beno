@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.db.models import CharField
 from django.contrib.auth.models import AbstractUser
@@ -15,7 +16,7 @@ class User(AbstractUser):
 class Task(models.Model):
     """Model representing a task to do."""
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = CharField(
         'Task',
         max_length=300,
@@ -65,7 +66,7 @@ class Task(models.Model):
 class Category(models.Model):
     """Model representing a category for a task (e.g. home, work, travel)"""
     name = CharField(max_length=200, help_text='Choose a category')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         """String for representing the Model object"""
