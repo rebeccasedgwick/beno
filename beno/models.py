@@ -17,7 +17,6 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, name, password):
         user = self.create_user(email=email, name=name, password=password)
-        user.is_active = True
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -32,6 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(_("Full name"), blank=True, max_length=60)
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     REQUIRED_FIELDS = ['name']
     USERNAME_FIELD = 'email'
 
@@ -92,9 +92,6 @@ class Task(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this task"""
         return reverse('task_detail', args=[str(self.id)])
-
-    class Meta:
-        ordering = ['due_by', 'priority']
 
 
 class Category(models.Model):
