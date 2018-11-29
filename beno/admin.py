@@ -22,5 +22,11 @@ class TaskAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Category)
-admin.site.register(User)
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user')

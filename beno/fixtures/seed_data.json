@@ -4,10 +4,8 @@
     "pk": 2,
     "fields":
     {
-      "username": "alice",
-      "first_name": "Alice",
-      "last_name": "Smith",
-      "email": "alice@email.com"
+      "name": "bob",
+      "email": "bob@email.com"
     }
   },
   {
@@ -15,10 +13,8 @@
     "pk": 3,
     "fields":
     {
-      "username": "bob",
-      "first_name": "Bob",
-      "last_name": "Jones",
-      "email": "bob@email.com"
+      "name": "alice",
+      "email": "alice@email.com"
     }
   },
   {
@@ -63,10 +59,10 @@
     "fields":
     {
       "user": 2,
-      "description": "Alice's task",
+      "description": "Bob's task",
       "due_by": "2018-12-05T22:00:00Z",
       "complete": false,
-      "notes": "More info on things for Alice to do",
+      "notes": "More info on things for Bob to do",
       "priority": "1",
       "category": [1, 2]
     }
@@ -77,10 +73,10 @@
     "fields":
     {
       "user": 2,
-      "description": "Another task for Alice",
+      "description": "Another task for Bob",
       "due_by": "2018-12-08T12:00:00Z",
       "complete": false,
-      "notes": "More info on things for Alice to do",
+      "notes": "More info on things for Bob to do",
       "priority": "2",
       "category": [1, 2]
     }
