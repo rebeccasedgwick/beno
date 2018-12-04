@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('beno/', include('beno.urls')),
+    # path('beno/', include('beno.urls')),
+    path('beno/api/', include('beno.api.urls')),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/beno/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
