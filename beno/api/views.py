@@ -1,6 +1,6 @@
 from rest_framework import generics, filters
-from beno.models import Task
-from .serializers import TaskSerializer
+from beno.models import Task, Category
+from .serializers import TaskSerializer, CategorySerializer
 
 
 class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -13,7 +13,6 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TaskCreateView(generics.CreateAPIView):
-    lookup_field = 'pk'
     serializer_class = TaskSerializer
 
     def perform_create(self, serializer):
@@ -40,3 +39,27 @@ class TaskUncompletedListView(TaskListView):
     def get_queryset(self):
         current_user = self.request.user
         return Task.objects.filter(user=current_user).filter(complete=False)
+
+
+class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        current_user = self.request.user
+        return Category.objects.filter(user=current_user)
+
+
+class CategoryCreateView(generics.CreateAPIView):
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class CategoryListView(generics.ListAPIView):
+    serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        current_user = self.request.user
+        return Category.objects.filter(user=current_user)

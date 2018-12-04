@@ -86,23 +86,33 @@ class Task(models.Model):
         return False
 
     def __str__(self):
-        """String for representing the Model object"""
+        """
+        String for representing the Model object
+        """
         return self.description
 
     def get_absolute_url(self):
-        """Returns the url to access a detail record for this task"""
+        """
+        Returns the url to access a detail record for this task
+        """
         return reverse('task_detail', args=[str(self.id)])
 
 
 class Category(models.Model):
-    """Model representing a category for a task (e.g. home, work, travel)"""
+    """
+    Model representing a category for a task (e.g. home, work, travel)
+    """
     name = models.CharField(max_length=200, help_text='Choose a category')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
-        """String for representing the Model object"""
+        """
+        String for representing the Model object
+        """
         return self.name
 
     def get_absolute_url(self):
-        """Returns the url to access a detail record for this category"""
+        """
+        Returns the url to access a detail record for this category
+        """
         return reverse('category-detail', args=[str(self.id)])
