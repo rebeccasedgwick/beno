@@ -21,7 +21,7 @@ class TaskCreateView(generics.CreateAPIView):
 
 
 class TaskListView(generics.ListAPIView):
-    lookup_field = 'pk'
+    # lookup_field = 'pk'
     serializer_class = TaskSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = ('due_by', 'priority')
@@ -35,3 +35,11 @@ class TaskListView(generics.ListAPIView):
         """
         current_user = self.request.user
         return Task.objects.filter(user=current_user)
+
+
+class TaskUncompletedListView(TaskListView):
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        current_user = self.request.user
+        return Task.objects.filter(user=current_user).filter(complete=False)
