@@ -20,3 +20,11 @@ class TaskCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class TaskListView(generics.ListAPIView):
+    lookup_field = 'pk'
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.all()
