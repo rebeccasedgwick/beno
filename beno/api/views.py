@@ -9,3 +9,14 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Task.objects.all()
+
+
+class TaskCreateView(generics.CreateAPIView):
+    lookup_field = 'pk'
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
