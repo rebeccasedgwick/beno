@@ -36,3 +36,6 @@ venv.bak/
 
 # Other
 *.DS_Store
+
+# npm
+node_modules/

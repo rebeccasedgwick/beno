@@ -9,6 +9,7 @@ django = ">=2.1.3"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 
