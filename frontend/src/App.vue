@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Welcome msg="Welcome to Beno"/>
+    <Tasks msg="Welcome to Beno"/>
   </div>
 </template>
 
 <script>
-import Welcome from './components/Welcome.vue';
+import Tasks from './components/Tasks.vue';
 
 export default {
   name: 'app',
   components: {
-    Welcome,
+    Tasks,
   },
 };
 </script>
