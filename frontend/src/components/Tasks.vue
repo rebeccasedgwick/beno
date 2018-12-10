@@ -57,12 +57,8 @@ export default {
   methods: {
     getTasks() {
         axios({
-            method:'get',
-            url: 'http://127.0.0.1:8000/beno/api/all_tasks/',
-            auth: {
-                email: 'bob@email.com',
-                password: 'bob123456'
-            }
+            method:'GET',
+            url: 'https://5c07feb5646dca0013f87eba.mockapi.io/task',
         }).then(response => this.tasks = response.data);
     }
   }
