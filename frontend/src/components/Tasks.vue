@@ -10,7 +10,12 @@
           <div class="card" v-for="task in tasks">
             <div class="card-content">
               <div class="content">
-                {{ task.description }}
+                <p><strong>{{ task.description }}</strong></p>
+                <p>{{ task.notes }}</p>
+                <p>Due: {{ task.due_by }}</p>
+                <p>Priority: {{ task.priority }}</p>
+                <p>Tags: </p>
+                  <p v-for="tag in task.tag">{{ tag }}</p>
               </div>
             </div>
 
@@ -28,10 +33,10 @@
           <div class="card" v-for="task in tasks" v-if="task.priority == 1">
             <div class="card-content">
               <div class="content">
-                <ul>
-                  <li>{{ task.description }}</li>
-                  <li>{{ task.due_by }}</li>
-                </ul>
+                  <p><strong>{{ task.description }}</strong></p>
+                  <p>{{ task.notes }}</p>
+                  <p>Due: {{ task.due_by }}</p>
+                  <p>Priority: {{ task.priority }}</p>
               </div>
             </div>
           </div>
@@ -48,7 +53,9 @@ export default {
   name: 'Tasks',
   data () {
     return {
-      tasks: []
+      tasks: {
+        tag: []
+      }
     }
   },
   mounted () {
