@@ -47,29 +47,29 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   name: 'Tasks',
-  data () {
+  data() {
     return {
       tasks: {
-        tag: []
-      }
-    }
+        tag: [],
+      },
+    };
   },
-  mounted () {
+  mounted() {
     this.getTasks();
   },
   methods: {
     getTasks() {
-        axios({
-            method:'GET',
-            url: 'https://5c07feb5646dca0013f87eba.mockapi.io/task',
-        }).then(response => this.tasks = response.data);
-    }
-  }
-}
+      axios({
+        method: 'GET',
+        url: 'https://5c07feb5646dca0013f87eba.mockapi.io/task',
+      }).then(response => this.tasks = response.data);
+    },
+  },
+};
 </script>
 
 <style scoped>

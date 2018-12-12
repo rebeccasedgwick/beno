@@ -27,6 +27,7 @@ local_settings.py
 
 # Environments
 .env
+.env.*
 .venv
 env/
 venv/

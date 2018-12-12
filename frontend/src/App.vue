@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <Login />
     <Tasks msg="Welcome to Beno"/>
   </div>
 </template>
 
 <script>
 import Tasks from './components/Tasks.vue';
+import Login from './components/Login.vue';
 
 export default {
   name: 'app',
   components: {
     Tasks,
+    Login,
   },
 };
 </script>

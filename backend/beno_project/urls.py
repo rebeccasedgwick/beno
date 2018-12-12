@@ -28,7 +28,7 @@ urlpatterns = [
     path('beno/api/', include('beno.api.urls')),
     path('beno/', include('beno.urls')),
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/beno/', permanent=True)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('', RedirectView.as_view(url='/beno/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
