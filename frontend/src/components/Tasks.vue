@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosAPI from '../axiosAPI';
 
 export default {
   name: 'Tasks',
@@ -63,9 +63,9 @@ export default {
   },
   methods: {
     getTasks() {
-      axios({
+      axiosAPI({
         method: 'GET',
-        url: 'https://5c07feb5646dca0013f87eba.mockapi.io/task',
+        url: `${process.env.VUE_APP_BACKEND_URL}/beno/api/all_tasks/`,
       }).then(response => this.tasks = response.data);
     },
   },

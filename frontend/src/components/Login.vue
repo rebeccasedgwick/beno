@@ -39,7 +39,6 @@ export default {
         .then(response => {
           localStorage.setItem('accessToken', response.data.access)
           localStorage.setItem('refreshToken', response.data.refresh)
-
         })
         .catch(error => {
           console.log(error);
