@@ -36,14 +36,14 @@ export default {
           email: this.input.email,
           password: this.input.password,
         })
-        .then(response => {
-          localStorage.setItem('accessToken', response.data.access)
-          localStorage.setItem('refreshToken', response.data.refresh)
+        .then((response) => {
+          localStorage.setItem('accessToken', response.data.access);
+          localStorage.setItem('refreshToken', response.data.refresh);
         })
-        .catch(error => {
-          console.log(error);
+        .catch((error) => {
+          console.error(error.response);
         });
-    }
+    },
   },
 };
 </script>

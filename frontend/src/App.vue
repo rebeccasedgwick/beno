@@ -1,7 +1,13 @@
 <template>
   <div id="app">
-    <Login />
-    <Tasks msg="Welcome to Beno"/>
+    <nav>
+      <router-link to="/">Home</router-link>
+      <br>
+      <router-link to="/login">Login</router-link>
+      <br>
+      <router-link to="/tasks">Tasks</router-link>
+    </nav>
+    <router-view/>
   </div>
 </template>
 
